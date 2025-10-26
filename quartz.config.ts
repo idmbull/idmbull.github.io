@@ -8,24 +8,20 @@ import * as Plugin from "./quartz/plugins"
 
 const config: QuartzConfig = {
   configuration: {
-    // 🏷️ Tiêu đề trang hiển thị ở tab trình duyệt
     pageTitle: "Idm Bull",
     pageTitleSuffix: "Ghi chú của Idm",
 
-    // ⚙️ Cài đặt cơ bản
-    enableSPA: true,             // Giữ nguyên (trải nghiệm mượt hơn)
-    enablePopovers: true,        // Bật popover khi hover link
+    enableSPA: true,
+    enablePopovers: true,
     analytics: {
-      provider: "plausible",     // Có thể bỏ qua nếu không dùng
+      provider: "plausible",
     },
-    locale: "vi-VN",             // Ngôn ngữ trang
-    baseUrl: "idmbull.github.io",  // Đặt domain GitHub Pages của bạn
+    locale: "vi-VN",
+    baseUrl: "idmbull.github.io",
     ignorePatterns: ["private", "templates", ".obsidian"],
 
-    // 🕓 Kiểu ngày mặc định (hiển thị ngày sửa cuối)
     defaultDateType: "modified",
 
-    // 🎨 Chủ đề & giao diện
     theme: {
       fontOrigin: "googleFonts",
       cdnCaching: true,
@@ -41,8 +37,8 @@ const config: QuartzConfig = {
           gray: "#9ca3af",
           darkgray: "#374151",
           dark: "#111827",
-          secondary: "#2563eb", // xanh dịu
-          tertiary: "#f59e0b",  // cam nhẹ
+          secondary: "#2563eb",
+          tertiary: "#f59e0b",
           highlight: "rgba(37, 99, 235, 0.1)",
           textHighlight: "#fff23688",
         },
@@ -61,7 +57,6 @@ const config: QuartzConfig = {
     },
   },
 
-  // 🔌 Không cần đổi phần này nếu bạn chưa rành
   plugins: {
     transformers: [
       Plugin.FrontMatter(),
@@ -72,7 +67,11 @@ const config: QuartzConfig = {
         theme: { light: "github-light", dark: "github-dark" },
         keepBackground: false,
       }),
-      Plugin.ObsidianFlavoredMarkdown({ enableInHtmlEmbed: false }),
+      Plugin.ObsidianFlavoredMarkdown({
+        enableInHtmlEmbed: true,       // render footnote trong embed
+        footnotes: true,               // bật footnote
+        inlineFootnoteAsPopup: true,   // hiển thị inline footnote dưới dạng popup
+      }),
       Plugin.GitHubFlavoredMarkdown(),
       Plugin.TableOfContents(),
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
