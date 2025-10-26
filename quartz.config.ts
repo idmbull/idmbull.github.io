@@ -2,57 +2,66 @@ import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
 
 /**
- * Quartz 4 Configuration
- *
- * See https://quartz.jzhao.xyz/configuration for more information.
+ * Cấu hình Quartz 4 cho website cá nhân
+ * Tham khảo thêm: https://quartz.jzhao.xyz/configuration
  */
+
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "Quartz 4",
-    pageTitleSuffix: "",
-    enableSPA: true,
-    enablePopovers: true,
+    // 🏷️ Tiêu đề trang hiển thị ở tab trình duyệt
+    pageTitle: "Idm Bull",
+    pageTitleSuffix: "Ghi chú của Idm",
+
+    // ⚙️ Cài đặt cơ bản
+    enableSPA: true,             // Giữ nguyên (trải nghiệm mượt hơn)
+    enablePopovers: true,        // Bật popover khi hover link
     analytics: {
-      provider: "plausible",
+      provider: "plausible",     // Có thể bỏ qua nếu không dùng
     },
-    locale: "en-US",
-    baseUrl: "quartz.jzhao.xyz",
+    locale: "vi-VN",             // Ngôn ngữ trang
+    baseUrl: "idmbull.github.io",  // Đặt domain GitHub Pages của bạn
     ignorePatterns: ["private", "templates", ".obsidian"],
+
+    // 🕓 Kiểu ngày mặc định (hiển thị ngày sửa cuối)
     defaultDateType: "modified",
+
+    // 🎨 Chủ đề & giao diện
     theme: {
       fontOrigin: "googleFonts",
       cdnCaching: true,
       typography: {
-        header: "Schibsted Grotesk",
+        header: "Inter",
         body: "Source Sans Pro",
-        code: "IBM Plex Mono",
+        code: "JetBrains Mono",
       },
       colors: {
         lightMode: {
-          light: "#faf8f8",
-          lightgray: "#e5e5e5",
-          gray: "#b8b8b8",
-          darkgray: "#4e4e4e",
-          dark: "#2b2b2b",
-          secondary: "#284b63",
-          tertiary: "#84a59d",
-          highlight: "rgba(143, 159, 169, 0.15)",
+          light: "#ffffff",
+          lightgray: "#e5e7eb",
+          gray: "#9ca3af",
+          darkgray: "#374151",
+          dark: "#111827",
+          secondary: "#2563eb", // xanh dịu
+          tertiary: "#f59e0b",  // cam nhẹ
+          highlight: "rgba(37, 99, 235, 0.1)",
           textHighlight: "#fff23688",
         },
         darkMode: {
-          light: "#161618",
-          lightgray: "#393639",
-          gray: "#646464",
-          darkgray: "#d4d4d4",
-          dark: "#ebebec",
-          secondary: "#7b97aa",
-          tertiary: "#84a59d",
-          highlight: "rgba(143, 159, 169, 0.15)",
+          light: "#111827",
+          lightgray: "#374151",
+          gray: "#9ca3af",
+          darkgray: "#d1d5db",
+          dark: "#f9fafb",
+          secondary: "#60a5fa",
+          tertiary: "#fbbf24",
+          highlight: "rgba(96, 165, 250, 0.1)",
           textHighlight: "#b3aa0288",
         },
       },
     },
   },
+
+  // 🔌 Không cần đổi phần này nếu bạn chưa rành
   plugins: {
     transformers: [
       Plugin.FrontMatter(),
@@ -60,10 +69,7 @@ const config: QuartzConfig = {
         priority: ["frontmatter", "git", "filesystem"],
       }),
       Plugin.SyntaxHighlighting({
-        theme: {
-          light: "github-light",
-          dark: "github-dark",
-        },
+        theme: { light: "github-light", dark: "github-dark" },
         keepBackground: false,
       }),
       Plugin.ObsidianFlavoredMarkdown({ enableInHtmlEmbed: false }),
@@ -80,15 +86,11 @@ const config: QuartzConfig = {
       Plugin.ContentPage(),
       Plugin.FolderPage(),
       Plugin.TagPage(),
-      Plugin.ContentIndex({
-        enableSiteMap: true,
-        enableRSS: true,
-      }),
+      Plugin.ContentIndex({ enableSiteMap: true, enableRSS: true }),
       Plugin.Assets(),
       Plugin.Static(),
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
-      // Comment out CustomOgImages to speed up build time
       Plugin.CustomOgImages(),
     ],
   },
